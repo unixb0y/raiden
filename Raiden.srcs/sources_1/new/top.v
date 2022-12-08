@@ -41,7 +41,10 @@ module top(
   output led_glitch_out,
   output wire glitch_out,
   output invert_glitch_out,
-  output wire reset_out
+  output wire reset_out,
+  output armed_out,
+  output glitched_out,
+  output finished_out
     );
  
 //  assign target_tx = ftdi_rx;
@@ -199,6 +202,10 @@ wire enable =  (force_state == AUTO && (((armed && !finished) && trigger) || (gl
   assign led6_debug = reset_target;
   assign led_blink = counter[26];
   assign led_glitch_out = glitch_out;
+  
+  assign armed_out = armed;
+  assign glitched_out = glitched;
+  assign finished_out = finished;
   
   always @(posedge clk)
   begin
